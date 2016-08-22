@@ -1,0 +1,7 @@
+Parser for the "Leonardo language". Used recursive descent based on following grammar:
+
+EXPR ::= <CMD> | <CMD> <EXPR>
+CMD ::= <MOVE> DOT | <STATE> DOT | REP NUM <CMD>
+MOVE ::= <DIR> NUM
+STATE ::= DOWN | UP | COLOR HEXA
+DIR ::= FORW | BACK | LEFT | RIGHT 
