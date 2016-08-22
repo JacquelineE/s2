@@ -6,12 +6,33 @@ public class Lexer {
   private ArrayList<Token> tokens;
   private Kattio io;
   private int currLine;
+  private int currentToken  = 0;
 
   public Lexer(Kattio io) {
     this.io = io;
     tokens = new ArrayList<Token>();
     generateTokens();
   }
+
+  // Kika på nästa token i indata, utan att gå vidare
+	public Token peekToken() throws SyntaxError {
+		// Slut på indataströmmen
+		if (!hasMoreTokens())
+			throw new SyntaxError("no more tokens");
+		return tokens.get(currentToken);
+	}
+
+	// Hämta nästa token i indata och gå framåt i indata
+	public Token nextToken() throws SyntaxError {
+		Token res = peekToken();
+		++currentToken;
+		return res;
+	}
+
+	public boolean hasMoreTokens() {
+		return currentToken < tokens.size();
+	}
+
 
   private void generateTokens() {
     String currWord;
